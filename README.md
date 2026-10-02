@@ -1,7 +1,7 @@
-# PlusLiga Player Performance Analysis
+# TAURON Liga Player Performance Analysis
 
 ## Goal
-Analyze player performance during the 2025/2026 PlusLiga season.
+Analyze player performance during the 2025/2026 TAURON Liga season.
 
 ## Tools
 - SQL
