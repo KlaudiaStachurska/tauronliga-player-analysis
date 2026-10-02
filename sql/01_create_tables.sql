@@ -7,7 +7,7 @@ CREATE TABLE players (
     height_cm INT,
     weight_kg INT,
     attack_reach_cm INT,
-    season VARCHAR(20) NOT NULL,
+    season NVARCHAR(20) NOT NULL,
     profile_url NVARCHAR(500)
   );
 
@@ -51,7 +51,7 @@ CREATE TABLE player_match_statistics (
     defence INT,
     assists INT,
 
-    season VARCHAR(20) NOT NULL,
+    season NVARCHAR(20) NOT NULL,
 
     match_url NVARCHAR(500),
     source_url NVARCHAR(500)
