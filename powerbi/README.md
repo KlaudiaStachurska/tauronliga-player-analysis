@@ -1,6 +1,6 @@
 # Power BI
 
-This folder contains the Power BI report created for the PlusLiga Player Performance Analysis project.
+This folder contains the Power BI report created for the TAURON Liga Player Performance Analysis project.
 
 The dashboard will include:
 - player performance overview
