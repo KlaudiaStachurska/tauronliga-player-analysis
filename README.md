@@ -10,7 +10,7 @@ Analyze player performance during the 2025/2026 TAURON Liga season.
 - Excel
 
 ## Data Source
-Official PlusLiga statistics
+Official TAURON Liga statistics
 
 ## Key Questions
 - Who are the most effective attackers?
