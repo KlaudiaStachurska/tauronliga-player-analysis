@@ -59,3 +59,48 @@ GROUP BY
     p.position,
     p.team
 ORDER BY total_blocks DESC;
+
+-- Number of players by position
+SELECT
+    position,
+    COUNT(*) AS player_count
+FROM dbo.players
+GROUP BY position
+ORDER BY player_count DESC;
+
+
+-- Number of players by team
+SELECT
+    team,
+    COUNT(*) AS player_count
+FROM dbo.players
+GROUP BY team
+ORDER BY player_count DESC;
+
+
+-- Number of teams
+SELECT
+    COUNT(DISTINCT team) AS team_count
+FROM dbo.players;
+
+
+-- Players with match statistics
+SELECT
+    COUNT(DISTINCT player_id) AS players_with_statistics
+FROM dbo.player_match_statistics;
+
+
+-- Number of unique matches
+SELECT
+    COUNT(DISTINCT match_id) AS match_count
+FROM dbo.player_match_statistics;
+
+
+-- Average physical attributes by position
+SELECT
+    position,
+    AVG(CAST(height_cm AS DECIMAL(10,2))) AS avg_height,
+    AVG(CAST(weight_kg AS DECIMAL(10,2))) AS avg_weight,
+    AVG(CAST(attack_reach_cm AS DECIMAL(10,2))) AS avg_attack_reach
+FROM dbo.players
+GROUP BY position;
