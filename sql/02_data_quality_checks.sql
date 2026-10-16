@@ -76,6 +76,17 @@ FROM dbo.players
 WHERE attack_reach_cm IS NULL;
 
 
+--Check total number of matches
+SELECT COUNT(*) AS match_count
+FROM dbo.matches;
+
+--Check for duplicate match IDs
+SELECT match_id,
+COUNT(*) AS duplicate_count
+FROM dbo.matches
+GROUP BY match_id
+HAVING COUNT(*) > 1;
+
 --Check for match statistics without a corresponding match
 SELECT DISTINCT pms.match_id
 FROM dbo.player_match_statistics pms
