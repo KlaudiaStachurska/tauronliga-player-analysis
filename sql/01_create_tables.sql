@@ -62,5 +62,18 @@ CREATE TABLE player_match_statistics (
   CONSTRAINT FK_player_match_statistics_players
     FOREIGN KEY (player_id)
     REFERENCES players(player_id)
+
+    
+    CREATE TABLE dbo.matches (
+    match_id INT PRIMARY KEY,
+    season NVARCHAR(20) NOT NULL,
+    phase NVARCHAR(50),
+    round NVARCHAR(50),
+    match_date DATETIME2,
+    home_team NVARCHAR(150) NOT NULL,
+    away_team NVARCHAR(150) NOT NULL,
+    home_sets INT,
+    away_sets INT,
+    match_url NVARCHAR(500)
 );
   
