@@ -75,3 +75,17 @@ SELECT
 FROM dbo.players
 WHERE attack_reach_cm IS NULL;
 
+
+--Check for match statistics without a corresponding match
+SELECT DISTINCT pms.match_id
+FROM dbo.player_match_statistics pms
+LEFT JOIN dbo.matches m
+	ON pms.match_id = m.match_id
+WHERE m.match_id IS NULL;
+
+--Check for matches without player statistics
+SELECT DISTINCT m.match_id
+FROM dbo.matches m
+LEFT JOIN dbo.player_match_statistics pms
+	ON m.match_id=pms.match_id
+WHERE pms.match_id IS NULL;
