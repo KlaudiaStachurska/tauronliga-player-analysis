@@ -1,11 +1,9 @@
 USE TauronLigaAnalysis;
 GO
-
 /*
     Asseco Resovia Rzeszów Analysis
     Season: 2025/2026
 */
-
 
 -- 1. Asseco Resovia squad
 SELECT
