@@ -117,7 +117,7 @@ GROUP BY p.player_id, p.player_name, p.position
 ORDER BY total_points DESC;
 
 
---Average points by each Asseco Resovia player
+--8. Average points by each Asseco Resovia player
 SELECT p.player_name, AVG(CAST(pms.points_total AS DECIMAL(10,2))) AS avg_points
 FROM dbo.players p
 JOIN dbo.player_match_statistics pms ON p.player_id = pms.player_id
@@ -126,7 +126,7 @@ GROUP BY p.player_id, p.player_name
 ORDER BY avg_points DESC;
 
 
---TOP 5 best Asseco Resovia's players
+--9. TOP 5 best Asseco Resovia's players
 SELECT TOP 5 SUM(pms.points_total) AS total_points,p.player_name
 FROM dbo.players p
 JOIN dbo.player_match_statistics pms ON p.player_id=pms.player_id
@@ -135,7 +135,7 @@ GROUP BY p.player_name
 ORDER BY total_points DESC;
 
 
---Comparison of Asseco Resovia's players
+--10. Comparison of Asseco Resovia's players
 WITH total AS (
     SELECT
         p.player_id,
