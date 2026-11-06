@@ -184,3 +184,27 @@ FROM total
 ORDER BY
     position,
     points_rank;
+
+
+-- 10. Player performance comparison by position
+WITH total AS
+	(
+		SELECT p.player_name, p.position,
+				SUM(pms.points_total) AS total_points,
+				SUM(pms.attack_total) AS total_attack_total,
+				SUM(pms.attack_blocked) AS total_attack_blocked,
+				SUM(pms.attack_points) AS total_attack_points,
+				SUM(pms.attack_errors) AS total_attack_errors,
+				SUM(pms.serve_aces) AS total_aces,
+				SUM(pms.block_points) AS total_blocks
+		FROM dbo.players p
+		JOIN dbo.player_match_statistics pms ON p.player_id=pms.player_id
+		WHERE p.team= 'Asseco Resovia Rzeszów'
+		GROUP BY p.player_id, p.player_name, p.position
+	)
+SELECT player_name, position, total_points,
+		CAST(total_attack_points * 100.0/NULLIF(total_attack_total,0) AS DECIMAL(10,2)) AS attack_success_pct,
+		CAST((total_attack_points-total_attack_errors-total_attack_blocked)*100.0/NULLIF(total_attack_total,0) AS DECIMAL(10,2)) AS attack_efficiency_pct,
+		RANK() OVER(PARTITION BY position ORDER BY total_points DESC) AS points_rank
+FROM total
+ORDER BY position, points_rank;
