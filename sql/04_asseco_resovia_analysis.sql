@@ -208,3 +208,29 @@ SELECT player_name, position, total_points,
 		RANK() OVER(PARTITION BY position ORDER BY total_points DESC) AS points_rank
 FROM total
 ORDER BY position, points_rank;
+
+
+--11. Resovia vs Tauron Liga 
+WITH tauron_liga AS
+	(
+		SELECT p.position, (SUM(pms.attack_efficiency_pct*pms.attack_total)/NULLIF(SUM(pms.attack_total),0)) AS weighted_attack_efficiency_pct_TAURON,
+		(SUM(pms.reception_positive_pct*pms.reception_total)/NULLIF(SUM(pms.reception_total),0)) AS weighted_reception_positive_pct_TAURON
+		FROM player_match_statistics pms
+		JOIN players p ON pms.player_id=p.player_id
+		WHERE p.team <> 'Asseco Resovia Rzeszów'
+		GROUP BY p.position
+	),
+asseco_resovia AS
+	(
+		SELECT p.position, (SUM(pms.attack_efficiency_pct*pms.attack_total)/NULLIF(SUM(pms.attack_total),0)) AS weighted_attack_efficiency_pct_RESOVIA,
+		(SUM(pms.reception_positive_pct*pms.reception_total)/NULLIF(SUM(pms.reception_total),0)) AS weighted_reception_positive_pct_RESOVIA
+		FROM player_match_statistics pms
+		JOIN players p ON pms.player_id=p.player_id
+		WHERE p.team='Asseco Resovia Rzeszów'
+		GROUP BY p.position
+	)
+SELECT a.position, t.weighted_attack_efficiency_pct_TAURON, t.weighted_reception_positive_pct_TAURON,
+		a.weighted_attack_efficiency_pct_RESOVIA, a.weighted_reception_positive_pct_RESOVIA
+FROM tauron_liga t
+JOIN asseco_resovia a ON t.position=a.position
+ORDER BY a.position
